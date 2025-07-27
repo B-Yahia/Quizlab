@@ -8,11 +8,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "users")
 public class User extends BaseModel {
     @NotBlank
     @Size(max = 50)
@@ -46,10 +48,28 @@ public class User extends BaseModel {
     private boolean isEmailVerified = false;
     private boolean isActive = true;
 
-    public User (String firstName,String lastName, String username,String password){
+    public User (String firstName, String lastName, String username, String password){
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+
 }

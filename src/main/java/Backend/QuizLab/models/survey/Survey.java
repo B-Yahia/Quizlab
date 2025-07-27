@@ -45,16 +45,37 @@ public class Survey extends BaseModel {
     @OneToMany(mappedBy = "survey")
     private List<Review> reviews = new ArrayList<>();
 
-
-
     @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL)
     private List<SurveyAttempt> surveyAttempts = new ArrayList<>();
 
     private boolean isPublished = false;
-    private boolean isPublic = true;
     private boolean allowAnonymous = false;
     private boolean requireAccessCode = false;
 
     @Column(length = 50)
     private String accessCode;
+
+    public Survey (String title, String description, User creator, List<Category> categories, List<Tag> tags, boolean isPublished,String accessCode ){
+        this.title = title;
+        this.description = description;
+        this.creator = creator;
+        this.categories = categories;
+        this.tags = tags;
+        this.isPublished = isPublished;
+        this.requireAccessCode = true;
+        this.accessCode = accessCode;
+    }
+
+    public Survey (String title, String description, User creator, List<Category> categories, List<Tag> tags, boolean isPublished ){
+        this.title = title;
+        this.description = description;
+        this.creator = creator;
+        this.categories = categories;
+        this.tags = tags;
+        this.isPublished = isPublished;
+    }
+
+    public void addQuestions (List<SurveyQuestion> questions){
+        this.questions = questions;
+    }
 }

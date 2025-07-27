@@ -2,6 +2,7 @@ package Backend.QuizLab.models.commun;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -17,5 +18,6 @@ public abstract class BaseModel {
     private Instant createdAt;
     @LastModifiedDate
     private Instant updatedAt;
+    @Setter
     private boolean isDeleted=false;
 }

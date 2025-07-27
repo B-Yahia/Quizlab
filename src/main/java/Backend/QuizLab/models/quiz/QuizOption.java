@@ -16,9 +16,13 @@ public class QuizOption extends BaseModel {
     @JoinColumn(name = "quiz_question_id", nullable = false)
     private QuizQuestion question;
 
-    public QuizOption (String statement, boolean isCorrect){
+    public QuizOption (String statement, boolean isCorrect ,QuizQuestion question){
         this.statement = statement;
         this.isCorrect = isCorrect;
+        this.question = question;
     }
 
+    public boolean isCorrect() {
+        return isCorrect;
+    }
 }

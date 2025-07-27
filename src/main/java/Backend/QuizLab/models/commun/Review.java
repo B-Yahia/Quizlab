@@ -5,12 +5,14 @@ import Backend.QuizLab.models.survey.Survey;
 import Backend.QuizLab.models.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import lombok.NonNull;
 
 @Entity
+@Table(name = "reviews")
 public class Review extends BaseModel {
     @ManyToOne
     private User reviewer;

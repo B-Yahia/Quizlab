@@ -12,4 +12,9 @@ public class SurveyOption extends BaseModel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "survey_question_id", nullable = false)
     private SurveyQuestion question;
+
+    public SurveyOption ( String statement, SurveyQuestion question ){
+        this.statement = statement;
+        this.question = question;
+    }
 }
