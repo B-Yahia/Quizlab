@@ -29,4 +29,44 @@ public class QuizAttempt extends BaseModel {
     @Enumerated(EnumType.STRING)
     private ProgressionStatus progressionStatus = ProgressionStatus.IN_PROGRESS;
 
+    public QuizAttempt ( User user, Quiz quiz, Duration duration, ProgressionStatus progressionStatus){
+        this.user = user;
+        this.quiz = quiz;
+        this.duration = duration;
+        this.progressionStatus = progressionStatus;
+    }
+
+    public QuizAttempt ( User user, Quiz quiz, ProgressionStatus progressionStatus){
+        this.user = user;
+        this.quiz = quiz;
+        this.progressionStatus = progressionStatus;
+    }
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public double getPercentageScore() {
+        return percentageScore;
+    }
+
+    public void setPercentageScore(double percentageScore) {
+        this.percentageScore = percentageScore;
+    }
+
+    public ProgressionStatus getProgressionStatus() {
+        return progressionStatus;
+    }
+
+    public void setProgressionStatus(ProgressionStatus progressionStatus) {
+        this.progressionStatus = progressionStatus;
+    }
+
+    public void addAnswerRecords (List<QuizAnswerRecord> answerRecords){
+        this.answerRecords = answerRecords;
+    }
 }

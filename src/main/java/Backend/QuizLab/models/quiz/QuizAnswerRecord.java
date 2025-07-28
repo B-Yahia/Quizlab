@@ -26,8 +26,33 @@ public class QuizAnswerRecord extends BaseModel {
 
     private boolean isCorrect;
     private double pointsEarned;
+    private boolean graded = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attempt_id", nullable = false)
     private QuizAttempt quizAttempt;
+
+    public QuizAnswerRecord (QuizQuestion question,  List<QuizOption> selectedOptions, QuizAttempt quizAttempt){
+        this.question = question;
+        this.selectedOptions = selectedOptions;
+        this.quizAttempt = quizAttempt;
+    }
+
+    public QuizAnswerRecord (QuizQuestion question,  String textResponse, QuizAttempt quizAttempt){
+        this.question = question;
+        this.textResponse = textResponse;
+        this.quizAttempt = quizAttempt;
+    }
+
+    public void setPointsEarned(double pointsEarned) {
+        this.pointsEarned = pointsEarned;
+    }
+
+    public void setGraded(boolean graded) {
+        this.graded = graded;
+    }
+
+    public void setCorrect(boolean correct) {
+        isCorrect = correct;
+    }
 }

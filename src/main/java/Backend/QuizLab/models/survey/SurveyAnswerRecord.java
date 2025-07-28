@@ -27,4 +27,15 @@ public class SurveyAnswerRecord extends BaseModel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attempt_id", nullable = false)
     private SurveyAttempt surveyAttempt;
+
+    public SurveyAnswerRecord ( SurveyQuestion question, List<SurveyOption> selectedOptions , SurveyAttempt surveyAttempt){
+        this.question = question;
+        this.selectedOptions = selectedOptions;
+        this.surveyAttempt = surveyAttempt;
+    }
+    public SurveyAnswerRecord ( SurveyQuestion question, String textResponse, SurveyAttempt surveyAttempt){
+        this.question = question;
+        this.textResponse = textResponse;
+        this.surveyAttempt = surveyAttempt;
+    }
 }

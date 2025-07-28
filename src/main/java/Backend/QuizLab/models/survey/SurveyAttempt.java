@@ -28,4 +28,21 @@ public class SurveyAttempt extends BaseModel {
     @Enumerated(EnumType.STRING)
     private ProgressionStatus progressionStatus = ProgressionStatus.IN_PROGRESS;
 
+    public SurveyAttempt ( User user, Survey survey, ProgressionStatus progressionStatus ){
+        this.user = user;
+        this.survey = survey;
+        this.progressionStatus = progressionStatus;
+    }
+
+    public SurveyAttempt ( User user, Survey survey, Duration duration, ProgressionStatus progressionStatus ){
+        this.user = user;
+        this.survey = survey;
+        this.duration = duration;
+        this.progressionStatus = progressionStatus;
+    }
+
+    public void addAnswerRecords (List<SurveyAnswerRecord> answers){
+        this.answers = answers;
+    }
+
 }
