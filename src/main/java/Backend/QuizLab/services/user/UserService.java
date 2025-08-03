@@ -10,17 +10,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User saveUser (User user){
+    public User createUser (User user){
         return userRepository.save(user);
     }
 
     public User getUserById (long id){
-        return userRepository.findById(id).orElseThrow(()-> new RuntimeException(" User with Id "+id+"not found "));
+        return userRepository.findById(id).orElseThrow(()-> new RuntimeException(" User with Id "+id+" not found "));
     }
 
     public User updateUserPassword (long id, String password){
         User user = getUserById(id);
         user.setPassword(password);
-        return saveUser(user);
+        return createUser(user);
     }
 }

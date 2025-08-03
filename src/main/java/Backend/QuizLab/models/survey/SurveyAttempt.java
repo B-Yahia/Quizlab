@@ -4,6 +4,7 @@ import Backend.QuizLab.models.commun.BaseModel;
 import Backend.QuizLab.models.commun.ProgressionStatus;
 import Backend.QuizLab.models.user.User;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -11,13 +12,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "survey_attempts")
+@NoArgsConstructor
 public class SurveyAttempt extends BaseModel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "survey_id", nullable = false)
+    @JoinColumn(name = "survey_id")
     private Survey survey;
 
     @OneToMany(mappedBy = "surveyAttempt", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -41,8 +43,11 @@ public class SurveyAttempt extends BaseModel {
         this.progressionStatus = progressionStatus;
     }
 
-    public void addAnswerRecords (List<SurveyAnswerRecord> answers){
-        this.answers = answers;
+    public List<SurveyAnswerRecord> getAnswers() {
+        return answers;
     }
 
+    public void setAnswers(List<SurveyAnswerRecord> answers) {
+        this.answers = answers;
+    }
 }

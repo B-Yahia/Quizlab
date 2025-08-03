@@ -7,12 +7,14 @@ import Backend.QuizLab.models.commun.Tag;
 import Backend.QuizLab.models.survey.SurveyQuestion;
 import Backend.QuizLab.models.user.User;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "quizzes")
+@NoArgsConstructor
 public class Quiz extends BaseModel {
     @Column(nullable = false)
     private String title;
@@ -85,7 +87,15 @@ public class Quiz extends BaseModel {
         this.accessCode = accessCode;
     }
 
-    public void addQuestions (List<QuizQuestion> questions){
+    public List<QuizQuestion> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<QuizQuestion> questions) {
         this.questions = questions;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

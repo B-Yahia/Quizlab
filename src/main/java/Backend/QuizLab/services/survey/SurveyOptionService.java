@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SurveyOptionService {
+
     @Autowired
     private SurveyOptionRepository surveyOptionRepository;
 
-    public SurveyOption saveSurveyOption (SurveyOption surveyOption){
+    public SurveyOption save (SurveyOption surveyOption){
         return surveyOptionRepository.save(surveyOption);
     }
 

@@ -17,7 +17,6 @@ public class Review extends BaseModel {
     @ManyToOne
     private User reviewer;
 
-    @NonNull
     @Min(1) @Max(5)
     private int rating;
 

@@ -2,15 +2,17 @@ package Backend.QuizLab.models.survey;
 
 import Backend.QuizLab.models.commun.BaseModel;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "survey_answer_records")
+@NoArgsConstructor
 public class SurveyAnswerRecord extends BaseModel {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id", nullable = false)
+    @JoinColumn(name = "question_id")
     private SurveyQuestion question;
 
     @ManyToMany
@@ -25,7 +27,7 @@ public class SurveyAnswerRecord extends BaseModel {
     private String textResponse;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attempt_id", nullable = false)
+    @JoinColumn(name = "attempt_id")
     private SurveyAttempt surveyAttempt;
 
     public SurveyAnswerRecord ( SurveyQuestion question, List<SurveyOption> selectedOptions , SurveyAttempt surveyAttempt){
@@ -36,6 +38,10 @@ public class SurveyAnswerRecord extends BaseModel {
     public SurveyAnswerRecord ( SurveyQuestion question, String textResponse, SurveyAttempt surveyAttempt){
         this.question = question;
         this.textResponse = textResponse;
+        this.surveyAttempt = surveyAttempt;
+    }
+
+    public void setSurveyAttempt(SurveyAttempt surveyAttempt) {
         this.surveyAttempt = surveyAttempt;
     }
 }

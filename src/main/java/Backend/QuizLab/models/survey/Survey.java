@@ -6,12 +6,14 @@ import Backend.QuizLab.models.commun.Review;
 import Backend.QuizLab.models.commun.Tag;
 import Backend.QuizLab.models.user.User;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "surveys")
+@NoArgsConstructor
 public class Survey extends BaseModel {
     @Column(nullable = false)
     private String title;
@@ -75,7 +77,15 @@ public class Survey extends BaseModel {
         this.isPublished = isPublished;
     }
 
-    public void addQuestions (List<SurveyQuestion> questions){
+    public List<SurveyQuestion> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<SurveyQuestion> questions) {
         this.questions = questions;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

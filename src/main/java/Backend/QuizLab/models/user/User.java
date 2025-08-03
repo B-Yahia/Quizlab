@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@NoArgsConstructor
 public class User extends BaseModel {
     @NotBlank
     @Size(max = 50)
@@ -70,6 +72,4 @@ public class User extends BaseModel {
     public void setRole(Role role) {
         this.role = role;
     }
-
-
 }

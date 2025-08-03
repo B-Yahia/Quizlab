@@ -5,9 +5,11 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @MappedSuperclass
+@NoArgsConstructor
 public abstract class BaseQuestion extends BaseModel {
     @Column(nullable = false, length = 1000)
     private String statement;
@@ -31,5 +33,9 @@ public abstract class BaseQuestion extends BaseModel {
     public BaseQuestion ( String statement, boolean isRequired){
         this.statement = statement;
         this.isRequired = isRequired;
+    }
+
+    public QuestionType getQuestionType() {
+        return questionType;
     }
 }
