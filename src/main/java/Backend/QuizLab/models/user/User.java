@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -17,6 +18,8 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
+@Getter
+@Setter
 public class User extends BaseModel {
     @NotBlank
     @Size(max = 50)
@@ -57,19 +60,4 @@ public class User extends BaseModel {
         this.password = password;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }

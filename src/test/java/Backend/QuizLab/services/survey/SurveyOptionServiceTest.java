@@ -11,8 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -53,10 +51,11 @@ public class SurveyOptionServiceTest {
         //  Assert
         assert foundSurveyOption != null;
         assert foundSurveyOption.getStatement().equals("Option 1");
+        verify( surveyOptionRepository,times(1)).findById(anyLong());
     }
 
     @Test
-    public void SurveyOptionService_GetById_ThrowExceptionForNoneValidId ()
+    public void SurveyOptionService_GetById_NonExistingEntity ()
     {
         //  Arrange
         when(surveyOptionRepository.findById(1L)).thenReturn(java.util.Optional.empty());

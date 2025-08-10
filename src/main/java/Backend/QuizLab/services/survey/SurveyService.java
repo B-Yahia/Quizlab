@@ -1,5 +1,6 @@
 package Backend.QuizLab.services.survey;
 
+import Backend.QuizLab.exceptions.ResourceNotFoundException;
 import Backend.QuizLab.models.survey.Survey;
 import Backend.QuizLab.models.survey.SurveyQuestion;
 import Backend.QuizLab.repositories.survey.SurveyRepository;
@@ -28,5 +29,9 @@ public class SurveyService {
         }
         newSurvey.setQuestions(questions);
         return newSurvey;
+    }
+
+    public Survey getById (long id){
+        return surveyRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Survey with the id "+ id +" not found"));
     }
 }

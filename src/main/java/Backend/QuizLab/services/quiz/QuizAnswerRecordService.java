@@ -16,7 +16,7 @@ public class QuizAnswerRecordService {
         return  quizAnswerRecordRepository.save(record);
     }
 
-    private QuizAnswerRecord getById (long id ){
+    public QuizAnswerRecord getById (long id ){
         return quizAnswerRecordRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Answer Record with id "+ id +" not found"));
     }
 

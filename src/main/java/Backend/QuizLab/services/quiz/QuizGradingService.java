@@ -4,6 +4,7 @@ import Backend.QuizLab.models.commun.QuestionType;
 import Backend.QuizLab.models.quiz.QuizAnswerRecord;
 import Backend.QuizLab.models.quiz.QuizAttempt;
 import Backend.QuizLab.models.quiz.QuizOption;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,7 +12,9 @@ import java.util.List;
 
 @Service
 public class QuizGradingService {
+
     private QuizAnswerRecord gradeAnswerRecord(QuizAnswerRecord record) {
+        //this line to retrieve the question if only the id was provided
         QuestionType type = record.getQuestion().getQuestionType();
         if (type == QuestionType.CHECKBOX) {
             gradeCheckboxQuestion(record);
@@ -51,7 +54,6 @@ public class QuizGradingService {
         for (QuizAnswerRecord record : quizAttempt.getAnswerRecords()){
             records.add(gradeAnswerRecord(record));
         }
-
         // Make sure that all the questions are graded
         quizAttempt.setGraded(quizAttempt.getAnswerRecords().stream().allMatch(QuizAnswerRecord::isGraded));
         var totalgrade = 0;

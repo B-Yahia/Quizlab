@@ -1,5 +1,6 @@
 package Backend.QuizLab.services.survey;
 
+import Backend.QuizLab.exceptions.ResourceNotFoundException;
 import Backend.QuizLab.models.survey.SurveyAnswerRecord;
 import Backend.QuizLab.models.survey.SurveyAttempt;
 import Backend.QuizLab.repositories.survey.SurveyAttemptRepository;
@@ -28,5 +29,9 @@ public class SurveyAttemptService {
         }
         attempt.setAnswers(answerRecords);
         return attempt;
+    }
+
+    public SurveyAttempt getById (long id){
+        return attemptRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Survey Attempt with the id  not found"));
     }
 }

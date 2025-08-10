@@ -5,8 +5,11 @@ import Backend.QuizLab.models.commun.Category;
 import Backend.QuizLab.models.commun.Review;
 import Backend.QuizLab.models.commun.Tag;
 import Backend.QuizLab.models.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,8 @@ import java.util.List;
 @Entity
 @Table(name = "surveys")
 @NoArgsConstructor
+@Getter
+@Setter
 public class Survey extends BaseModel {
     @Column(nullable = false)
     private String title;
@@ -23,6 +28,7 @@ public class Survey extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id")
+    @JsonIgnore
     private User creator;
 
     @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)

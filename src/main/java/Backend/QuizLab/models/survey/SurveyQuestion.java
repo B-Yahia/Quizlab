@@ -2,12 +2,11 @@ package Backend.QuizLab.models.survey;
 
 import Backend.QuizLab.models.commun.BaseQuestion;
 import Backend.QuizLab.models.commun.QuestionType;
-import Backend.QuizLab.models.commun.Review;
-import Backend.QuizLab.models.quiz.Quiz;
-import Backend.QuizLab.models.quiz.QuizOption;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +14,15 @@ import java.util.List;
 @Entity
 @Table (name = "survey_questions")
 @NoArgsConstructor
+@Getter
+@Setter
 public class SurveyQuestion extends BaseQuestion {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SurveyOption> options = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "survey_id")
+    @JsonIgnore
     private Survey survey;
 
     public SurveyQuestion (String statement, String additionalInfo, boolean isRequired, Survey survey, QuestionType questionType){
@@ -45,5 +47,9 @@ public class SurveyQuestion extends BaseQuestion {
 
     public void setSurvey(Survey survey) {
         this.survey = survey;
+    }
+
+    public Survey getSurvey() {
+        return survey;
     }
 }

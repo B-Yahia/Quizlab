@@ -1,5 +1,6 @@
 package Backend.QuizLab.services.quiz;
 
+import Backend.QuizLab.exceptions.ResourceNotFoundException;
 import Backend.QuizLab.models.quiz.Quiz;
 import Backend.QuizLab.models.quiz.QuizQuestion;
 import Backend.QuizLab.repositories.quiz.QuizRepository;
@@ -26,5 +27,9 @@ public class QuizService {
         }
         newQuiz.setQuestions(questions);
         return newQuiz;
+    }
+
+    public Quiz getById(long id){
+        return quizRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Quiz with the id "+ id +" not found"));
     }
 }

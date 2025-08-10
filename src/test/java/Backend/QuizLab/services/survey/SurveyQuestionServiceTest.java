@@ -22,10 +22,8 @@ public class SurveyQuestionServiceTest {
 
     @Mock
     private SurveyQuestionRepository surveyQuestionRepository;
-
     @Mock
     private SurveyOptionService surveyOptionService;
-
     @InjectMocks
     private SurveyQuestionService surveyQuestionService;
 

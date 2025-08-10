@@ -2,8 +2,11 @@ package Backend.QuizLab.models.quiz;
 
 import Backend.QuizLab.models.commun.BaseQuestion;
 import Backend.QuizLab.models.commun.QuestionType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,8 @@ import java.util.List;
 @Entity
 @Table(name = "quiz_questions")
 @NoArgsConstructor
+@Getter
+@Setter
 public class QuizQuestion extends BaseQuestion {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<QuizOption> options = new ArrayList<>();
@@ -23,6 +28,7 @@ public class QuizQuestion extends BaseQuestion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")
+    @JsonIgnore
     private Quiz quiz;
 
     public QuizQuestion ( String statement, String additionalInfo, boolean isRequired, double basePoints, Quiz quiz , List<QuizOption> options){
@@ -71,29 +77,12 @@ public class QuizQuestion extends BaseQuestion {
         this.wrongAttempts++;
     }
 
-    public void setBasePoints(double basePoints) {
-        this.basePoints = basePoints;
-    }
-
     public void addQuestionOptions(List<QuizOption> options){
         this.options=options;
     }
 
-    public List<QuizOption> getOptions() {
-        return options;
-    }
-
     public void setOptions(List<QuizOption> options) {
         this.options = options;
+        this.setQuestionType();
     }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
-
-    public double getBasePoints() {
-        return basePoints;
-    }
-
-
 }

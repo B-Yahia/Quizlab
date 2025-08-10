@@ -6,8 +6,11 @@ import Backend.QuizLab.models.commun.Review;
 import Backend.QuizLab.models.commun.Tag;
 import Backend.QuizLab.models.survey.SurveyQuestion;
 import Backend.QuizLab.models.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +18,8 @@ import java.util.List;
 @Entity
 @Table(name = "quizzes")
 @NoArgsConstructor
+@Getter
+@Setter
 public class Quiz extends BaseModel {
     @Column(nullable = false)
     private String title;
@@ -26,6 +31,7 @@ public class Quiz extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id")
+    @JsonIgnore
     private User creator;
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -85,17 +91,5 @@ public class Quiz extends BaseModel {
         this.isPublished = isPublished;
         this.requireAccessCode = true;
         this.accessCode = accessCode;
-    }
-
-    public List<QuizQuestion> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<QuizQuestion> questions) {
-        this.questions = questions;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 }

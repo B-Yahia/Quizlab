@@ -2,8 +2,12 @@ package Backend.QuizLab.models.quiz;
 
 import Backend.QuizLab.models.commun.BaseModel;
 import Backend.QuizLab.models.commun.QuestionType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +15,13 @@ import java.util.List;
 @Entity
 @Table(name = "quiz_answer_records")
 @NoArgsConstructor
+@Getter
+@Setter
 public class QuizAnswerRecord extends BaseModel {
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
+    @JsonIgnore
     private QuizQuestion question;
 
     @ManyToMany
@@ -33,6 +41,7 @@ public class QuizAnswerRecord extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attempt_id")
+    @JsonIgnore
     private QuizAttempt quizAttempt;
 
     public QuizAnswerRecord (QuizQuestion question,  List<QuizOption> selectedOptions, QuizAttempt quizAttempt){
@@ -47,35 +56,4 @@ public class QuizAnswerRecord extends BaseModel {
         this.quizAttempt = quizAttempt;
     }
 
-    public QuizQuestion getQuestion() {
-        return question;
-    }
-
-    public List<QuizOption> getSelectedOptions() {
-        return selectedOptions;
-    }
-
-    public void setPointsEarned(double pointsEarned) {
-        this.pointsEarned = pointsEarned;
-    }
-
-    public void setGraded(boolean graded) {
-        this.graded = graded;
-    }
-
-    public void setCorrect(boolean correct) {
-        isCorrect = correct;
-    }
-
-    public boolean isGraded() {
-        return graded;
-    }
-
-    public double getPointsEarned() {
-        return pointsEarned;
-    }
-
-    public void setQuizAttempt(QuizAttempt quizAttempt) {
-        this.quizAttempt = quizAttempt;
-    }
 }

@@ -1,5 +1,6 @@
 package Backend.QuizLab.services.quiz;
 
+import Backend.QuizLab.exceptions.ResourceNotFoundException;
 import Backend.QuizLab.models.quiz.QuizOption;
 import Backend.QuizLab.models.quiz.QuizQuestion;
 import Backend.QuizLab.repositories.quiz.QuizQuestionRepository;
@@ -22,9 +23,14 @@ public class QuizQuestionService {
         List<QuizOption> options = new ArrayList<>();
         for (QuizOption option : quizQuestion.getOptions()){
             option.setQuestion(question);
-            options.add(quizOptionService.create(option));
+            var savedOption = quizOptionService.create(option);
+            options.add(savedOption);
         }
         question.setOptions(options);
         return question;
+    }
+
+    public QuizQuestion getById (long id){
+        return quizQuestionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Quiz Question with the id "+ id +" not found"));
     }
 }

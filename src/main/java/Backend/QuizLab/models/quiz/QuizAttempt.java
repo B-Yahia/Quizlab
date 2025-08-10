@@ -2,8 +2,11 @@ package Backend.QuizLab.models.quiz;
 import Backend.QuizLab.models.commun.BaseModel;
 import Backend.QuizLab.models.commun.ProgressionStatus;
 import Backend.QuizLab.models.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -12,13 +15,17 @@ import java.util.List;
 @Entity
 @Table(name = "quiz_attempts")
 @NoArgsConstructor
+@Getter
+@Setter
 public class QuizAttempt extends BaseModel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")
+    @JsonIgnore
     private Quiz quiz;
 
     @OneToMany(mappedBy = "quizAttempt", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -45,51 +52,4 @@ public class QuizAttempt extends BaseModel {
         this.progressionStatus = progressionStatus;
     }
 
-    public double getTotalScore() {
-        return totalScore;
-    }
-
-    public void setTotalScore(double totalScore) {
-        this.totalScore = totalScore;
-    }
-
-    public double getPercentageScore() {
-        return percentageScore;
-    }
-
-    public void setPercentageScore(double percentageScore) {
-        this.percentageScore = percentageScore;
-    }
-
-    public ProgressionStatus getProgressionStatus() {
-        return progressionStatus;
-    }
-
-    public void setProgressionStatus(ProgressionStatus progressionStatus) {
-        this.progressionStatus = progressionStatus;
-    }
-
-    public void setAnswerRecords(List<QuizAnswerRecord> answerRecords) {
-        this.answerRecords = answerRecords;
-    }
-
-    public List<QuizAnswerRecord> getAnswerRecords() {
-        return answerRecords;
-    }
-
-    public boolean isGraded() {
-        return graded;
-    }
-
-    public void setGraded(boolean graded) {
-        this.graded = graded;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
 }

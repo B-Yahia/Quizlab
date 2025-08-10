@@ -10,6 +10,8 @@ import lombok.Setter;
 
 @MappedSuperclass
 @NoArgsConstructor
+@Getter
+@Setter
 public abstract class BaseQuestion extends BaseModel {
     @Column(nullable = false, length = 1000)
     private String statement;
@@ -35,7 +37,4 @@ public abstract class BaseQuestion extends BaseModel {
         this.isRequired = isRequired;
     }
 
-    public QuestionType getQuestionType() {
-        return questionType;
-    }
 }
