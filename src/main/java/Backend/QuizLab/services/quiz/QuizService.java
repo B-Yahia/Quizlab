@@ -2,7 +2,6 @@ package Backend.QuizLab.services.quiz;
 
 import Backend.QuizLab.exceptions.ResourceNotFoundException;
 import Backend.QuizLab.models.quiz.Quiz;
-import Backend.QuizLab.models.quiz.QuizQuestion;
 import Backend.QuizLab.repositories.quiz.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,17 +18,14 @@ public class QuizService {
     private QuizQuestionService questionService;
 
     public Quiz create( Quiz quiz){
-        var newQuiz = quizRepository.save(quiz);
-        List<QuizQuestion> questions = new ArrayList<>();
-        for(QuizQuestion question : quiz.getQuestions()){
-            question.setQuiz(newQuiz);
-            questions.add(questionService.create(question));
-        }
-        newQuiz.setQuestions(questions);
-        return newQuiz;
+        return quizRepository.save(quiz);
     }
 
     public Quiz getById(long id){
         return quizRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Quiz with the id "+ id +" not found"));
+    }
+
+    public List<Quiz> getAll (){
+        return quizRepository.findAll();
     }
 }

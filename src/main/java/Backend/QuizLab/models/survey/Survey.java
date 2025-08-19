@@ -7,6 +7,7 @@ import Backend.QuizLab.models.commun.Tag;
 import Backend.QuizLab.models.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
 public class Survey extends BaseModel {
     @Column(nullable = false)
     private String title;
@@ -27,11 +29,10 @@ public class Survey extends BaseModel {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "creator_id")
-    @JsonIgnore
+    @JoinColumn(name = "creator_id",nullable = false)
     private User creator;
 
-    @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SurveyQuestion> questions = new ArrayList<>();
 
     @ManyToMany
@@ -50,11 +51,8 @@ public class Survey extends BaseModel {
     )
     private List<Tag> tags = new ArrayList<>();
 
-    @OneToMany(mappedBy = "survey")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
-
-    @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL)
-    private List<SurveyAttempt> surveyAttempts = new ArrayList<>();
 
     private boolean isPublished = false;
     private boolean allowAnonymous = false;
@@ -63,35 +61,4 @@ public class Survey extends BaseModel {
     @Column(length = 50)
     private String accessCode;
 
-    public Survey (String title, String description, User creator, List<Category> categories, List<Tag> tags, boolean isPublished,String accessCode ){
-        this.title = title;
-        this.description = description;
-        this.creator = creator;
-        this.categories = categories;
-        this.tags = tags;
-        this.isPublished = isPublished;
-        this.requireAccessCode = true;
-        this.accessCode = accessCode;
-    }
-
-    public Survey (String title, String description, User creator, List<Category> categories, List<Tag> tags, boolean isPublished ){
-        this.title = title;
-        this.description = description;
-        this.creator = creator;
-        this.categories = categories;
-        this.tags = tags;
-        this.isPublished = isPublished;
-    }
-
-    public List<SurveyQuestion> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<SurveyQuestion> questions) {
-        this.questions = questions;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }

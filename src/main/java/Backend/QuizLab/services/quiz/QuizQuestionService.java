@@ -19,15 +19,16 @@ public class QuizQuestionService {
     private QuizOptionService quizOptionService;
 
     public QuizQuestion create (QuizQuestion quizQuestion){
-        var question = quizQuestionRepository.save(quizQuestion);
-        List<QuizOption> options = new ArrayList<>();
-        for (QuizOption option : quizQuestion.getOptions()){
-            option.setQuestion(question);
-            var savedOption = quizOptionService.create(option);
-            options.add(savedOption);
-        }
-        question.setOptions(options);
-        return question;
+//        var question = quizQuestionRepository.save(quizQuestion);
+//        List<QuizOption> options = new ArrayList<>();
+//        for (QuizOption option : quizQuestion.getOptions()){
+//            option.setQuestion(question);
+//            var savedOption = quizOptionService.create(option);
+//            options.add(savedOption);
+//        }
+//        question.setOptions(options);
+//        return question;
+        return  quizQuestionRepository.save(quizQuestion);
     }
 
     public QuizQuestion getById (long id){

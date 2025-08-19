@@ -21,14 +21,7 @@ public class SurveyAttemptService {
 
     @Transactional
     public SurveyAttempt create (SurveyAttempt surveyAttempt){
-        var attempt = attemptRepository.save(surveyAttempt);
-        List<SurveyAnswerRecord> answerRecords = new ArrayList<>();
-        for (SurveyAnswerRecord answerRecord : surveyAttempt.getAnswers()){
-            answerRecord.setSurveyAttempt(attempt);
-            answerRecords.add(answerRecordService.create(answerRecord));
-        }
-        attempt.setAnswers(answerRecords);
-        return attempt;
+        return  attemptRepository.save(surveyAttempt);
     }
 
     public SurveyAttempt getById (long id){

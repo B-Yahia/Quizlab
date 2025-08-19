@@ -21,7 +21,6 @@ public class QuizAnswerRecord extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
-    @JsonIgnore
     private QuizQuestion question;
 
     @ManyToMany
@@ -38,22 +37,5 @@ public class QuizAnswerRecord extends BaseModel {
     private boolean isCorrect;
     private double pointsEarned;
     private boolean graded = false;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attempt_id")
-    @JsonIgnore
-    private QuizAttempt quizAttempt;
-
-    public QuizAnswerRecord (QuizQuestion question,  List<QuizOption> selectedOptions, QuizAttempt quizAttempt){
-        this.question = question;
-        this.selectedOptions = selectedOptions;
-        this.quizAttempt = quizAttempt;
-    }
-
-    public QuizAnswerRecord (QuizQuestion question,  String textResponse, QuizAttempt quizAttempt){
-        this.question = question;
-        this.textResponse = textResponse;
-        this.quizAttempt = quizAttempt;
-    }
 
 }

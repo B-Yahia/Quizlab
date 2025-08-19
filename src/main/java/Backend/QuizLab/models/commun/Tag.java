@@ -16,7 +16,6 @@ import java.util.List;
 @Table(name = "tags")
 @Getter
 @Setter
-
 public class Tag extends BaseModel {
     @Column(nullable = false, unique = true)
     private String name;

@@ -18,17 +18,12 @@ import java.util.List;
 @Getter
 @Setter
 public class QuizAttempt extends BaseModel {
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")
-    @JsonIgnore
     private Quiz quiz;
 
-    @OneToMany(mappedBy = "quizAttempt", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<QuizAnswerRecord> answerRecords = new ArrayList<>();
 
     private double totalScore;
@@ -38,18 +33,4 @@ public class QuizAttempt extends BaseModel {
 
     @Enumerated(EnumType.STRING)
     private ProgressionStatus progressionStatus = ProgressionStatus.IN_PROGRESS;
-
-    public QuizAttempt ( User user, Quiz quiz, Duration duration, ProgressionStatus progressionStatus){
-        this.user = user;
-        this.quiz = quiz;
-        this.duration = duration;
-        this.progressionStatus = progressionStatus;
-    }
-
-    public QuizAttempt ( User user, Quiz quiz, ProgressionStatus progressionStatus){
-        this.user = user;
-        this.quiz = quiz;
-        this.progressionStatus = progressionStatus;
-    }
-
 }

@@ -1,5 +1,7 @@
 package Backend.QuizLab.controllers;
 
+import Backend.QuizLab.dtos.survey.SurveyAttemptDTO;
+import Backend.QuizLab.mapper.survey.SurveyAttemptMapper;
 import Backend.QuizLab.models.survey.SurveyAttempt;
 import Backend.QuizLab.services.survey.SurveyAttemptService;
 import jakarta.validation.Valid;
@@ -14,17 +16,19 @@ public class SurveyAttemptController {
 
     @Autowired
     private SurveyAttemptService attemptService;
+    @Autowired
+    private SurveyAttemptMapper mapper;
 
     @PostMapping
-    public ResponseEntity<SurveyAttempt> createSurveyAttempt (@Valid @RequestBody SurveyAttempt surveyAttempt){
-        var createdAttempt = attemptService.create(surveyAttempt);
-        return new ResponseEntity<>(createdAttempt,HttpStatus.CREATED);
+    public ResponseEntity<SurveyAttemptDTO> createSurveyAttempt (@Valid @RequestBody SurveyAttemptDTO dto){
+        var entity = attemptService.create(mapper.toEntity(dto));
+        return new ResponseEntity<>(mapper.toDTO(entity),HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SurveyAttempt> getSurveyAttempt (@PathVariable long id){
+    public ResponseEntity<SurveyAttemptDTO> getSurveyAttempt (@PathVariable long id){
         var attempt = attemptService.getById(id);
-        return new ResponseEntity<>(attempt,HttpStatus.FOUND);
+        return new ResponseEntity<>(mapper.toDTO(attempt),HttpStatus.FOUND);
     }
 
 }

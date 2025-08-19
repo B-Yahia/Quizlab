@@ -25,7 +25,7 @@ public class QuizAttemptMapper {
         entity.setGraded(dto.isGraded());
         entity.setDuration(dto.getDuration());
         entity.setTotalScore(dto.getTotalScore());
-        entity.setUser(dto.getUserId() != null ? userService.getUserById(dto.getUserId()) : null);
+//        entity.setUser(dto.getUserId() != null ? userService.getUserById(dto.getUserId()) : null);
         entity.setProgressionStatus(dto.getProgressionStatus());
         entity.setPercentageScore(dto.getPercentageScore());
         return entity;
@@ -36,7 +36,7 @@ public class QuizAttemptMapper {
         dto.setId(entity.getId());
         dto.setQuizId(entity.getQuiz().getId());
         dto.setAnswerRecords(answerRecordMapper.toDTOs(entity.getAnswerRecords()));
-        dto.setUserId(entity.getUser() == null ? null : entity.getUser().getId());
+//        dto.setUserId(entity.getUser() == null ? null : entity.getUser().getId());
         dto.setGraded(entity.isGraded());
         dto.setDuration(entity.getDuration());
         dto.setPercentageScore(entity.getPercentageScore());

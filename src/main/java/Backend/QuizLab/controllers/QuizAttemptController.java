@@ -27,7 +27,6 @@ public class QuizAttemptController {
 
     @GetMapping ("/{id}")
     public ResponseEntity<QuizAttempt> getQuizAttempt (@PathVariable long id){
-        var attempt = attemptService.getById(id);
-        return new ResponseEntity<>(attempt, HttpStatus.FOUND);
+        return new ResponseEntity<>(attemptService.getById(id), HttpStatus.FOUND);
     }
 }

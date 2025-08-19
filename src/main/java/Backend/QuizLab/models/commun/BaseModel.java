@@ -30,4 +30,5 @@ public abstract class BaseModel {
     private Instant updatedAt;
     private boolean isDeleted=false;
 
+
 }

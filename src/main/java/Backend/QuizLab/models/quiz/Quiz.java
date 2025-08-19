@@ -29,12 +29,7 @@ public class Quiz extends BaseModel {
 
     private Integer timeLimit;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "creator_id")
-    @JsonIgnore
-    private User creator;
-
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
     private List<QuizQuestion> questions = new ArrayList<>();
 
     @ManyToMany
@@ -53,43 +48,22 @@ public class Quiz extends BaseModel {
     )
     private List<Tag> tags = new ArrayList<>();
 
-    @OneToMany(mappedBy = "quiz")
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
-    private List<QuizAttempt> quizAttempts = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "creator_id", nullable = false)
+    private User creator;
 
     // Statistics
     private Double averageScore = 0.0;
     private Integer highestScore = 0;
-
     // Settings
-    private boolean isPublished = false;
-    private boolean requireAccessCode = false;
-    private boolean allowAnonymous = false;
+    private Boolean isPublished = false;
+    private Boolean requireAccessCode = false;
+    private Boolean allowAnonymous = false;
 
     @Column(length = 50)
     private String accessCode;
 
-    public Quiz (String title, String description, Integer timeLimit, User creator, List<Category> categories, List<Tag> tags, boolean isPublished) {
-        this.title = title;
-        this.description = description;
-        this.timeLimit = timeLimit;
-        this.creator = creator;
-        this.categories = categories;
-        this.tags = tags;
-        this.isPublished = isPublished;
-    }
-
-    public Quiz (String title, String description, Integer timeLimit, User creator, List<Category> categories, List<Tag> tags, boolean isPublished, String accessCode) {
-        this.title = title;
-        this.description = description;
-        this.timeLimit = timeLimit;
-        this.creator = creator;
-        this.categories = categories;
-        this.tags = tags;
-        this.isPublished = isPublished;
-        this.requireAccessCode = true;
-        this.accessCode = accessCode;
-    }
 }

@@ -4,9 +4,7 @@ import Backend.QuizLab.models.commun.BaseQuestion;
 import Backend.QuizLab.models.commun.QuestionType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,41 +12,19 @@ import java.util.List;
 @Entity
 @Table(name = "quiz_questions")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class QuizQuestion extends BaseQuestion {
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true ,fetch =  FetchType.EAGER)
     private List<QuizOption> options = new ArrayList<>();
 
-    private int correctAttempts = 0;
-    private int wrongAttempts = 0;
+    private Integer correctAttempts = 0;
+    private Integer wrongAttempts = 0;
 
     @Column(nullable = false)
-    private double basePoints = 1.0;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "quiz_id")
-    @JsonIgnore
-    private Quiz quiz;
-
-    public QuizQuestion ( String statement, String additionalInfo, boolean isRequired, double basePoints, Quiz quiz , List<QuizOption> options){
-        super(statement,additionalInfo,isRequired);
-        this.basePoints = basePoints;
-        this.quiz = quiz;
-        this.options = options;
-        this.setQuestionType();
-    }
-    public QuizQuestion ( String statement, boolean isRequired, Quiz quiz, List<QuizOption> options){
-        super(statement,isRequired);
-        this.quiz = quiz;
-        this.options = options;
-        this.setQuestionType();
-    }
-    public QuizQuestion ( String statement, boolean isRequired, Quiz quiz){
-        super(statement,isRequired);
-        this.quiz = quiz;
-        this.setQuestionType();
-    }
+    private Double basePoints = 1.0;
 
     private long countCorrectOptions() {
         return options.stream()
@@ -56,7 +32,7 @@ public class QuizQuestion extends BaseQuestion {
                 .count();
     }
 
-    public void setQuestionType(){
+    public void defineQuestionType(){
         int optionCount = options == null ? 0 : options.size();
         long correctCount = countCorrectOptions();
 
@@ -81,8 +57,4 @@ public class QuizQuestion extends BaseQuestion {
         this.options=options;
     }
 
-    public void setOptions(List<QuizOption> options) {
-        this.options = options;
-        this.setQuestionType();
-    }
 }

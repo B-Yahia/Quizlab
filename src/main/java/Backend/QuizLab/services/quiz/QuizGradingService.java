@@ -41,7 +41,6 @@ public class QuizGradingService {
                 .stream()
                 .filter(QuizOption::isCorrect)
                 .count();
-
         boolean allCorrect = record.getSelectedOptions().size() == correctAnswersCount &&
                 record.getSelectedOptions().stream().allMatch(QuizOption::isCorrect);
 

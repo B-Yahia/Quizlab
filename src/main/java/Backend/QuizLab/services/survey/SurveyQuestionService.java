@@ -19,14 +19,7 @@ public class SurveyQuestionService {
     private SurveyOptionService surveyOptionService;
 
     public SurveyQuestion create ( SurveyQuestion surveyQuestion){
-        var question = surveyQuestionRepository.save(surveyQuestion);
-        List<SurveyOption> options = new ArrayList<>();
-        for (SurveyOption option : question.getOptions()) {
-            option.setQuestion(question);
-            options.add(surveyOptionService.save(option));
-        }
-        question.setOptions(options);
-        return question;
+        return surveyQuestionRepository.save(surveyQuestion);
     }
 
     public  SurveyQuestion getById (long id){

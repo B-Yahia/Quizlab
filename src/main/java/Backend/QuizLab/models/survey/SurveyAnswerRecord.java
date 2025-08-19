@@ -29,27 +29,4 @@ public class SurveyAnswerRecord extends BaseModel {
 
     @Column(columnDefinition = "TEXT")
     private String textResponse;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attempt_id")
-    private SurveyAttempt surveyAttempt;
-
-    public SurveyAnswerRecord ( SurveyQuestion question, List<SurveyOption> selectedOptions , SurveyAttempt surveyAttempt){
-        this.question = question;
-        this.selectedOptions = selectedOptions;
-        this.surveyAttempt = surveyAttempt;
-    }
-    public SurveyAnswerRecord ( SurveyQuestion question, String textResponse, SurveyAttempt surveyAttempt){
-        this.question = question;
-        this.textResponse = textResponse;
-        this.surveyAttempt = surveyAttempt;
-    }
-
-    public void setSurveyAttempt(SurveyAttempt surveyAttempt) {
-        this.surveyAttempt = surveyAttempt;
-    }
-
-    public SurveyAttempt getSurveyAttempt() {
-        return surveyAttempt;
-    }
 }
