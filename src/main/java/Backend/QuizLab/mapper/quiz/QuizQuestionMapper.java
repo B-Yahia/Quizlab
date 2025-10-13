@@ -28,6 +28,15 @@ public class QuizQuestionMapper {
         return entity;
     }
 
+    public QuizQuestion toEntity ( Backend.QuizLab.dtos.llm.quiz.Question aiQuestion){
+        var entity = new QuizQuestion();
+        entity.setStatement(aiQuestion.statement);
+        entity.setAdditionalInfo(aiQuestion.explanation.orElse(""));
+        entity.setOptions(optionMapper.toEntities(aiQuestion.correct_options,aiQuestion.other_options));
+        entity.defineQuestionType();
+        return entity;
+    }
+
     public QuizQuestionDTO toDTO (QuizQuestion entity){
         var dto = new QuizQuestionDTO();
         dto.setId(entity.getId());
@@ -54,6 +63,14 @@ public class QuizQuestionMapper {
         List<QuizQuestion> entities = new ArrayList<>();
         for (QuizQuestionDTO dto : DTOs){
             entities.add(toEntity(dto));
+        }
+        return entities;
+    }
+
+    public List<QuizQuestion> AIResponseToEntities (List<Backend.QuizLab.dtos.llm.quiz.Question> aiQuestions){
+        List<QuizQuestion> entities = new ArrayList<>();
+        for (Backend.QuizLab.dtos.llm.quiz.Question aiQuestion : aiQuestions){
+            entities.add(toEntity(aiQuestion));
         }
         return entities;
     }

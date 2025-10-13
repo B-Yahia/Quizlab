@@ -4,10 +4,7 @@ import Backend.QuizLab.models.commun.BaseModel;
 import Backend.QuizLab.models.commun.ProgressionStatus;
 import Backend.QuizLab.models.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -19,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class SurveyAttempt extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY)

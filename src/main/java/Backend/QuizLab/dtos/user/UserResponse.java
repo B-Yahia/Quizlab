@@ -1,15 +1,19 @@
-package Backend.QuizLab.controllers.auth;
+package Backend.QuizLab.dtos.user;
 
 import Backend.QuizLab.models.user.Role;
 
+import java.util.UUID;
+
 public record UserResponse(
-        Long id,
+        UUID id,
         String firstName,
         String lastName,
         String username,
         String email,
         Role role,
         boolean emailVerified,
-        boolean active
+        boolean active,
+        Long numberCreatedQuizzes,
+        Long numberOfCreatedSurveys
 ) {
 }

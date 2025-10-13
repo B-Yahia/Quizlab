@@ -1,6 +1,5 @@
 package Backend.QuizLab.security;
 
-
 import Backend.QuizLab.services.user.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +25,7 @@ import java.util.List;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Value("${app.cors.allowed-origins:http://localhost:3000}")
+    @Value("${app.cors.allowed-origins}")
     private List<String> allowedOrigins;
     @Autowired
     private CustomUserDetailsService userDetailsService;
@@ -55,7 +54,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/login",
                                 "/api/auth/register",
                                 "/api/auth/health",
-                                "/api/**"
+                                "/api/**",
+                                "/chat"
                                 ).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -69,6 +69,7 @@ public class SecurityConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+        System.out.println(allowedOrigins);
         CorsConfiguration cfg = new CorsConfiguration();
         cfg.setAllowedOrigins(allowedOrigins);
         cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));

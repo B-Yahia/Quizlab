@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Getter
@@ -12,11 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class QuizDTO {
-    private Long id;
+    private UUID id;
     private String title;
     private String description;
     private Integer timeLimit;
-    private Long creatorId;
+    private UUID creatorId;
     private List<QuizQuestionDTO> questions = new ArrayList<>();
     private Double averageScore;
     private Integer highestScore;
@@ -24,4 +25,5 @@ public class QuizDTO {
     private Boolean requireAccessCode = false;
     private Boolean allowAnonymous = false;
     private String accessCode;
+    private Long attemptsCount;
 }

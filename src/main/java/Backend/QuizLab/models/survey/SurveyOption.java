@@ -12,6 +12,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class SurveyOption extends BaseModel {
     @Column(nullable = false)
     private String statement;

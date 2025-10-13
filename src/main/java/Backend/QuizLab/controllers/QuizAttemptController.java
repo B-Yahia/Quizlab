@@ -1,7 +1,9 @@
 package Backend.QuizLab.controllers;
 
 import Backend.QuizLab.dtos.quiz.QuizAttemptDTO;
+import Backend.QuizLab.dtos.quiz.QuizAttemptResponse;
 import Backend.QuizLab.mapper.quiz.QuizAttemptMapper;
+import Backend.QuizLab.mapper.quiz.QuizAttemptResponseMapper;
 import Backend.QuizLab.models.quiz.QuizAttempt;
 import Backend.QuizLab.services.quiz.QuizAttemptService;
 import jakarta.validation.Valid;
@@ -9,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/quiz_attempts")
@@ -18,6 +23,8 @@ public class QuizAttemptController {
     private QuizAttemptService attemptService;
     @Autowired
     private QuizAttemptMapper mapper;
+    @Autowired
+    private QuizAttemptResponseMapper attemptResponseMapper;
 
     @PostMapping
     public ResponseEntity<QuizAttemptDTO> createQuizAttempt (@Valid @RequestBody QuizAttemptDTO dto){
@@ -26,7 +33,14 @@ public class QuizAttemptController {
     }
 
     @GetMapping ("/{id}")
-    public ResponseEntity<QuizAttempt> getQuizAttempt (@PathVariable long id){
-        return new ResponseEntity<>(attemptService.getById(id), HttpStatus.FOUND);
+    public ResponseEntity<QuizAttemptResponse> getQuizAttempt (@PathVariable UUID id){
+        var entity = attemptService.getById(id);
+        return new ResponseEntity<>(attemptResponseMapper.toResponse(entity), HttpStatus.OK);
+    }
+
+    @GetMapping ("/quiz/{id}")
+    public ResponseEntity<List<QuizAttemptResponse>> getQuizAttemptsByQuizId(@PathVariable UUID id){
+        var list = attemptService.getAllByQuizId(id);
+        return new ResponseEntity<>(attemptResponseMapper.toResponses(list),HttpStatus.OK);
     }
 }

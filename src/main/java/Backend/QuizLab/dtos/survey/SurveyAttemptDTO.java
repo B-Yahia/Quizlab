@@ -4,6 +4,7 @@ import Backend.QuizLab.models.commun.ProgressionStatus;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Getter
@@ -11,8 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class SurveyAttemptDTO {
-    private Long id;
-    private Long SurveyId;
+    private UUID id;
+    private UUID SurveyId;
     private List<SurveyAnswerRecordDTO> answers;
     private ProgressionStatus progressionStatus;
 }

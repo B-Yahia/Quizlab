@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class QuizService {
@@ -21,11 +22,19 @@ public class QuizService {
         return quizRepository.save(quiz);
     }
 
-    public Quiz getById(long id){
+    public Quiz getById(UUID id){
         return quizRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Quiz with the id "+ id +" not found"));
     }
 
     public List<Quiz> getAll (){
         return quizRepository.findAll();
+    }
+
+    public List<Quiz> getAllByCreatorId (UUID id){
+        return quizRepository.getAllByCreatorId(id);
+    }
+
+    public long getCountOfUserQuizzes (UUID id){
+        return quizRepository.countByCreatorId(id);
     }
 }

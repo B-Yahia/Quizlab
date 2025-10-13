@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Getter
@@ -11,13 +12,14 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class SurveyDTO {
-    private Long id;
+    private UUID id;
     private String title;
     private String description;
-    private Long creatorId;
+    private UUID creatorId;
     private List<SurveyQuestionDTO> questions = new ArrayList<>();
     private Boolean isPublished;
     private Boolean requireAccessCode = false;
     private Boolean allowAnonymous = false;
     private String accessCode;
+    private Long attemptsCount;
 }

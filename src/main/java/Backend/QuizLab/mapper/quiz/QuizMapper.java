@@ -2,6 +2,7 @@ package Backend.QuizLab.mapper.quiz;
 
 import Backend.QuizLab.dtos.quiz.QuizDTO;
 import Backend.QuizLab.models.quiz.Quiz;
+import Backend.QuizLab.services.quiz.QuizAttemptService;
 import Backend.QuizLab.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,8 @@ public class QuizMapper {
     private QuizQuestionMapper questionMapper;
     @Autowired
     private UserService userService;
+    @Autowired
+    private QuizAttemptService attemptService;
 
     public Quiz toEntity(QuizDTO dto) {
         var entity = new Quiz();
@@ -33,6 +36,14 @@ public class QuizMapper {
         return entity;
     }
 
+    public Quiz toEntity(Backend.QuizLab.dtos.llm.quiz.Quiz aiQuiz){
+        var entity = new Quiz();
+        entity.setTitle(aiQuiz.title);
+        entity.setDescription(aiQuiz.description);
+        entity.setQuestions(questionMapper.AIResponseToEntities(aiQuiz.questions));
+        return entity;
+    }
+
     public QuizDTO toDTO(Quiz entity) {
         var dto = new QuizDTO();
         dto.setId(entity.getId());
@@ -47,6 +58,7 @@ public class QuizMapper {
         dto.setRequireAccessCode(entity.getRequireAccessCode());
         dto.setAllowAnonymous(entity.getAllowAnonymous());
         dto.setAccessCode(entity.getAccessCode());
+        dto.setAttemptsCount(attemptService.getCountOfAttemptOnQuiz(entity.getId()));
         return dto;
     }
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SurveyQuestionService {
@@ -22,7 +23,7 @@ public class SurveyQuestionService {
         return surveyQuestionRepository.save(surveyQuestion);
     }
 
-    public  SurveyQuestion getById (long id){
+    public  SurveyQuestion getById (UUID id){
         return surveyQuestionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Question with the ID "+id+" can not be found"));
     }
 }

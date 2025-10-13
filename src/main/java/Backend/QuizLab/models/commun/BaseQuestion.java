@@ -4,14 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.MappedSuperclass;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @MappedSuperclass
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public abstract class BaseQuestion extends BaseModel {
     @Column(nullable = false, length = 1000)
     private String statement;

@@ -1,12 +1,14 @@
 package Backend.QuizLab.services.user;
 
-import Backend.QuizLab.controllers.auth.UserRegistrationRequest;
+import Backend.QuizLab.dtos.user.UserRegistrationRequest;
 import Backend.QuizLab.exceptions.ResourceNotFoundException;
 import Backend.QuizLab.mapper.user.UserMapper;
 import Backend.QuizLab.models.user.User;
 import Backend.QuizLab.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class UserService{
@@ -26,7 +28,7 @@ public class UserService{
         return repository.save(user);
     }
 
-    public User getUserById (long id){
+    public User getUserById (UUID id){
         return repository.findById(id).orElseThrow(()-> new RuntimeException(" User with Id "+id+" not found "));
     }
     public User findByIdentifierOrThrow(String identifier) {

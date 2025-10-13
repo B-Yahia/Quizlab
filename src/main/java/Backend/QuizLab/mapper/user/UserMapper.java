@@ -1,10 +1,12 @@
 package Backend.QuizLab.mapper.user;
 
-import Backend.QuizLab.controllers.auth.UserRegistrationRequest;
-import Backend.QuizLab.controllers.auth.UserResponse;
-import Backend.QuizLab.dtos.UserDTO;
+import Backend.QuizLab.dtos.user.UserRegistrationRequest;
+import Backend.QuizLab.dtos.user.UserResponse;
+import Backend.QuizLab.dtos.user.UserDTO;
 import Backend.QuizLab.models.user.Role;
 import Backend.QuizLab.models.user.User;
+import Backend.QuizLab.services.quiz.QuizService;
+import Backend.QuizLab.services.survey.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,10 @@ import java.util.List;
 public class UserMapper {
     @Autowired
     private PasswordEncoder encoder;
+    @Autowired
+    private QuizService quizService;
+    @Autowired
+    private SurveyService surveyService;
 
     public User toEntity (UserDTO dto) {
         var entity = new User();
@@ -70,7 +76,9 @@ public class UserMapper {
                 u.getEmail(),
                 u.getRole(),
                 u.isEmailVerified(),
-                u.isActive()
+                u.isActive(),
+                quizService.getCountOfUserQuizzes(u.getId()),
+                surveyService.getCountsOfUserSurveys(u.getId())
         );
     }
     public User toEntity (UserRegistrationRequest userRequest){
@@ -85,10 +93,6 @@ public class UserMapper {
         user.setActive(true);
         user.setDeleted(false);
         return user;
-    }
-
-    public UserResponse toUserResponse (User user){
-        return new UserResponse(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getEmail(),user.getRole(), user.isEmailVerified(), user.isActive());
     }
 
 

@@ -1,4 +1,4 @@
-package Backend.QuizLab.controllers.auth;
+package Backend.QuizLab.dtos.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class QuizQuestionService {
@@ -19,19 +20,10 @@ public class QuizQuestionService {
     private QuizOptionService quizOptionService;
 
     public QuizQuestion create (QuizQuestion quizQuestion){
-//        var question = quizQuestionRepository.save(quizQuestion);
-//        List<QuizOption> options = new ArrayList<>();
-//        for (QuizOption option : quizQuestion.getOptions()){
-//            option.setQuestion(question);
-//            var savedOption = quizOptionService.create(option);
-//            options.add(savedOption);
-//        }
-//        question.setOptions(options);
-//        return question;
         return  quizQuestionRepository.save(quizQuestion);
     }
 
-    public QuizQuestion getById (long id){
+    public QuizQuestion getById (UUID id){
         return quizQuestionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Quiz Question with the id "+ id +" not found"));
     }
 }

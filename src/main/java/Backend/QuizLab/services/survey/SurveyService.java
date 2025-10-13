@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SurveyService {
@@ -22,11 +23,19 @@ public class SurveyService {
         return surveyRepository.save(survey);
     }
 
-    public Survey getById (long id){
+    public Survey getById (UUID id){
         return surveyRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Survey with the id "+ id +" not found"));
     }
 
     public List<Survey> getAll (){
         return surveyRepository.findAll();
+    }
+
+    public List<Survey> getAllByCreatorId ( UUID id){
+        return surveyRepository.getAllByCreatorId(id);
+    }
+
+    public long getCountsOfUserSurveys (UUID id){
+        return surveyRepository.countByCreatorId(id);
     }
 }

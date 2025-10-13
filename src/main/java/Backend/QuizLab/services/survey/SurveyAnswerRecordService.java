@@ -6,6 +6,8 @@ import Backend.QuizLab.repositories.survey.SurveyAnswerRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class SurveyAnswerRecordService {
 
@@ -16,7 +18,7 @@ public class SurveyAnswerRecordService {
         return recordRepository.save(surveyAnswerRecord);
     }
 
-    public SurveyAnswerRecord getById (long id){
+    public SurveyAnswerRecord getById (UUID id){
         return recordRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Answer Record with id "+ id +" not found"));
     }
 }

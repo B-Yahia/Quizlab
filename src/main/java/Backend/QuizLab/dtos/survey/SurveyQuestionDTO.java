@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Getter
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class SurveyQuestionDTO {
-    private Long id;
+    private UUID id;
     private String statement;
     private String additionalInfo;
     private QuestionType questionType;

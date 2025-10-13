@@ -1,6 +1,9 @@
-package Backend.QuizLab.controllers.auth;
+package Backend.QuizLab.controllers;
 
 
+import Backend.QuizLab.dtos.user.LoginRequest;
+import Backend.QuizLab.dtos.user.UserRegistrationRequest;
+import Backend.QuizLab.dtos.user.UserResponse;
 import Backend.QuizLab.mapper.user.UserMapper;
 import Backend.QuizLab.models.user.User;
 import Backend.QuizLab.services.user.UserService;

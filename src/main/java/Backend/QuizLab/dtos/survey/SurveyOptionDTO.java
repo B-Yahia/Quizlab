@@ -2,12 +2,14 @@ package Backend.QuizLab.dtos.survey;
 
 import lombok.*;
 
+import java.util.UUID;
+
 @NoArgsConstructor
 @Getter
 @Setter
 @AllArgsConstructor
 @ToString
 public class SurveyOptionDTO {
-    private Long id;
+    private UUID id;
     private String statement;
 }

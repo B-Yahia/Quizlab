@@ -6,6 +6,8 @@ import Backend.QuizLab.repositories.commun.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ReviewService {
 
@@ -16,7 +18,7 @@ public class ReviewService {
         return repository.save(review);
     }
 
-    public Review getById (long id){
+    public Review getById (UUID id){
         return repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Review with the id "+ id +" not found"));
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class QuizOptionMapper {
@@ -30,9 +31,9 @@ public class QuizOptionMapper {
         dto.setIsCorrect(entity.isCorrect());
         return dto;
     }
-    public List<QuizOption> getEntities (List<Long> ids){
+    public List<QuizOption> getEntities (List<UUID> ids){
         List<QuizOption> options = new ArrayList<>();
-        for (Long id :ids){
+        for (UUID id :ids){
             options.add(optionService.getById(id));
         }
         return options;
@@ -46,6 +47,23 @@ public class QuizOptionMapper {
         return options;
     }
 
+    public List<QuizOption> toEntities (List<String> correctOptions, List<String> wrongOptions){
+        List<QuizOption> options = new ArrayList<>();
+        for (String op :correctOptions){
+            var correctOption = new QuizOption();
+            correctOption.setStatement(op);
+            correctOption.setCorrect(true);
+            options.add(correctOption);
+        }
+        for (String op: wrongOptions){
+            var wrongOption = new QuizOption();
+            wrongOption.setStatement(op);
+            wrongOption.setCorrect(false);
+            options.add(wrongOption);
+        }
+        return options;
+    }
+
     public List<QuizOptionDTO> toDTOs (List<QuizOption> entities){
         List<QuizOptionDTO> DTOs = new ArrayList<>();
         for (QuizOption entity :entities){
@@ -54,8 +72,8 @@ public class QuizOptionMapper {
         return DTOs;
     }
 
-    public List<Long> getIds (List<QuizOption> options){
-        List<Long> ids = new ArrayList<>();
+    public List<UUID> getIds (List<QuizOption> options){
+        List<UUID> ids = new ArrayList<>();
         for (QuizOption option : options){
             ids.add(option.getId());
         }

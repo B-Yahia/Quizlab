@@ -7,10 +7,7 @@ import Backend.QuizLab.models.commun.Tag;
 import Backend.QuizLab.models.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@ToString
 public class Survey extends BaseModel {
     @Column(nullable = false)
     private String title;

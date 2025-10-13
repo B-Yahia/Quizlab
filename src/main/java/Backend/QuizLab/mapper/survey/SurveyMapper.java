@@ -2,6 +2,7 @@ package Backend.QuizLab.mapper.survey;
 
 import Backend.QuizLab.dtos.survey.SurveyDTO;
 import Backend.QuizLab.models.survey.Survey;
+import Backend.QuizLab.services.survey.SurveyAttemptService;
 import Backend.QuizLab.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,9 +15,10 @@ public class SurveyMapper {
 
     @Autowired
     private SurveyQuestionMapper questionMapper;
-
     @Autowired
     private UserService userService;
+    @Autowired
+    private SurveyAttemptService attemptService;
 
     public Survey toEntity(SurveyDTO dto) {
         var entity = new Survey();
@@ -43,6 +45,7 @@ public class SurveyMapper {
         dto.setRequireAccessCode(entity.isRequireAccessCode());
         dto.setAllowAnonymous(entity.isAllowAnonymous());
         dto.setAccessCode(entity.getAccessCode());
+        dto.setAttemptsCount(attemptService.getCountOfAttemptOnSurvey(entity.getId()));
         return dto;
     }
 

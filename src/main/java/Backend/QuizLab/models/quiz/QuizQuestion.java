@@ -37,7 +37,7 @@ public class QuizQuestion extends BaseQuestion {
         long correctCount = countCorrectOptions();
 
         if (optionCount >= 2 && correctCount == 1) {
-            this.questionType = QuestionType.CHECKBOX;
+            this.questionType = QuestionType.SINGLE_CHOICE;
         } else if (optionCount >= 2 && correctCount >= 2) {
             this.questionType = QuestionType.MULTIPLE_CHOICE;
         } else {

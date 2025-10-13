@@ -1,4 +1,4 @@
-package Backend.QuizLab.dtos;
+package Backend.QuizLab.dtos.user;
 
 import Backend.QuizLab.models.user.Role;
 import jakarta.validation.constraints.Email;
@@ -6,13 +6,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.UUID;
+
 @NoArgsConstructor
 @Getter
 @Setter
 @AllArgsConstructor
 @ToString
 public class UserDTO {
-    private Long id;
+    private UUID id;
     private String firstName;
     @NotBlank @Size(max = 50)
     private String lastName;

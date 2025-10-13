@@ -4,10 +4,7 @@ import Backend.QuizLab.models.commun.BaseQuestion;
 import Backend.QuizLab.models.commun.QuestionType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@ToString
 public class SurveyQuestion extends BaseQuestion {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SurveyOption> options = new ArrayList<>();

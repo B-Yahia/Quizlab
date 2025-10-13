@@ -6,6 +6,8 @@ import Backend.QuizLab.repositories.survey.SurveyOptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class SurveyOptionService {
 
@@ -16,7 +18,7 @@ public class SurveyOptionService {
         return surveyOptionRepository.save(surveyOption);
     }
 
-    public  SurveyOption getById ( long id ){
+    public  SurveyOption getById ( UUID id ){
         return surveyOptionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Option not found"));
     }
 

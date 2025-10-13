@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class SurveyOptionMapper {
@@ -28,9 +29,9 @@ public class SurveyOptionMapper {
         return dto;
     }
 
-    public List<SurveyOption> getEntities(List<Long> ids) {
+    public List<SurveyOption> getEntities(List<UUID> ids) {
         List<SurveyOption> options = new ArrayList<>();
-        for (Long id : ids) {
+        for (UUID id : ids) {
             options.add(optionService.getById(id));
         }
         return options;
@@ -52,8 +53,8 @@ public class SurveyOptionMapper {
         return DTOs;
     }
 
-    public List<Long> getIds(List<SurveyOption> options) {
-        List<Long> ids = new ArrayList<>();
+    public List<UUID> getIds(List<SurveyOption> options) {
+        List<UUID> ids = new ArrayList<>();
         for (SurveyOption option : options) {
             ids.add(option.getId());
         }

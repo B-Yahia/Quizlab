@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SurveyAttemptService {
@@ -24,7 +25,19 @@ public class SurveyAttemptService {
         return  attemptRepository.save(surveyAttempt);
     }
 
-    public SurveyAttempt getById (long id){
+    public SurveyAttempt getById (UUID id){
         return attemptRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Survey Attempt with the id  not found"));
+    }
+
+    public List<SurveyAttempt> getAll() {
+        return attemptRepository.findAll();
+    }
+
+    public List<SurveyAttempt> getAllBySurveyId(UUID id) {
+        return attemptRepository.getAllBySurveyId(id);
+    }
+
+    public Long getCountOfAttemptOnSurvey(UUID id){
+        return  attemptRepository.countBySurveyId(id);
     }
 }
