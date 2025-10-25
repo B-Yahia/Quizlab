@@ -19,6 +19,14 @@ public class AppExceptionHandler {
         return  errorMsg;
     }
 
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler(RuntimeException.class)
+    public Map<String,String> handleAllExad (RuntimeException exception){
+        Map<String, String> errorMsg = new HashMap<>();
+        errorMsg.put("Messages", exception.getMessage());
+        return  errorMsg;
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String,String> handleInvalidData (MethodArgumentNotValidException exception){
