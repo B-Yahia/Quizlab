@@ -34,9 +34,9 @@ public class QuizController {
     }
 
     @PostMapping("/ai")
-    public  ResponseEntity<Quiz> createQuiz (@Valid @RequestBody QuizRequest request){
-        var quiz = openAIService.createQuiz(request.userPrompt,request.numberOfQuestions);
-        return new ResponseEntity<>(quiz,HttpStatus.OK);
+    public  ResponseEntity<QuizDTO> createQuiz (@Valid @RequestBody QuizRequest request){
+        var aiResponse = openAIService.createQuiz(request.userPrompt,request.numberOfQuestions);
+        return new ResponseEntity<>(mapper.toDTO(aiResponse),HttpStatus.OK);
     }
 
     @GetMapping ("/{id}")

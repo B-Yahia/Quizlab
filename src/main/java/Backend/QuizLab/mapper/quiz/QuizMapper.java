@@ -61,6 +61,13 @@ public class QuizMapper {
         dto.setAttemptsCount(attemptService.getCountOfAttemptOnQuiz(entity.getId()));
         return dto;
     }
+    public QuizDTO toDTO (Backend.QuizLab.dtos.llm.quiz.Quiz aiQuiz){
+        var dto = new QuizDTO();
+        dto.setTitle(aiQuiz.title);
+        dto.setDescription(aiQuiz.description);
+        dto.setQuestions(questionMapper.toDTOs(questionMapper.AIResponseToEntities(aiQuiz.questions)));
+        return dto;
+    }
 
     public List<QuizDTO> toDTOs(List<Quiz> entities) {
         List<QuizDTO> DTOs = new ArrayList<>();
