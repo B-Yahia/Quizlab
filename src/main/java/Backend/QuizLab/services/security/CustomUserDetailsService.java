@@ -1,4 +1,4 @@
-package Backend.QuizLab.services.user;
+package Backend.QuizLab.services.security;
 
 import Backend.QuizLab.exceptions.ResourceNotFoundException;
 import Backend.QuizLab.models.user.User;

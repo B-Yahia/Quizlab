@@ -17,4 +17,9 @@ public class TestController {
         var resp = openAIService.createQuiz("I want you to generate a quiz that will test my knowledge about geography",5);
         return new ResponseEntity<>(resp, HttpStatus.OK);
     }
+    @GetMapping("/test")
+    public ResponseEntity<String> test(){
+        return new ResponseEntity<>("Testing", HttpStatus.OK);
+    }
+
 }
